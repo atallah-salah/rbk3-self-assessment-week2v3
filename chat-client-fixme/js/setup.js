@@ -13,8 +13,9 @@ var getData = function() {
   $.ajax(SERVER_URL + '?order=-createdAt', {
     contentType: 'application/json',
     success: function(data) {
-      processData(data); // eslint-disable-line no-use-before-define
-    },
+    processData(data); // eslint-disable-line no-use-before-define
+    
+  },
     error: function(data) {
       $('#error').prepend(' oh no').append('!');
     }
@@ -104,6 +105,7 @@ var displayData = function(data, user) {
   });
 };
 
+//this function to send message
 var postData = function(message, username) {
   $.ajax({
     url: SERVER_URL,
@@ -114,7 +116,10 @@ var postData = function(message, username) {
       text: message
     }),
     success: function(data) {
+      
+      checkNewData
       console.log('Success!', data);
+  
     },
     error: function(data) {
       console.log(data);
