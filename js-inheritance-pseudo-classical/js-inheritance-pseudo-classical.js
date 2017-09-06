@@ -10,32 +10,37 @@
 // DO NOT MODIFY FUNCTIONS `makePhone` AND `makeSmartPhone`
 // USE THE CONSTRUCTOR FUNCTIONS LOCATED AT THE END OF THIS FILE
 
-var makePhone = function(phoneNumber) {
-  var result = {};
+var Phone = function(phoneNumber) {
+ 
+    this.phoneNumber = phoneNumber;
 
-  result.phoneNumber = phoneNumber;
-  result.send = function(recipientPhoneNumber, message) {
-    return 'sending the message "' + message + '" to the phone number ' + recipientPhoneNumber + ' from ' + this.phoneNumber;
-  };
-
-  return result;
+};
+Phone.prototype.send = function(recipientPhoneNumber, message) {
+  return 'sending the message "' + message + '" to the phone number ' + recipientPhoneNumber + ' from ' + this.phoneNumber;
 };
 
-var makeSmartPhone = function(phoneNumber, email) {
-  var phone = makePhone(phoneNumber);
-  var oldSend = phone.send;
 
-  phone.email = email;
-  phone.send = function(recipientPhoneNumberOrEmail, message) {
+
+
+var SmartPhone = function(phoneNumber, email) {
+  //          var phone = makePhone(phoneNumber);
+  Phone.call(phoneNumber,this);
+
+ this.oldSend = this.send;
+
+  this.email = email;
+};
+
+
+    smartphone.prototype.phone.send = function(recipientPhoneNumberOrEmail, message) {
     if (typeof recipientPhoneNumberOrEmail === 'number') {
-      // We need `.call` here to make sure that `this` will reference our smart phone in makePhone's send
-      return oldSend.call(this, recipientPhoneNumberOrEmail, message);
-    } else {
-      return 'sending the message "' + message + '" to email ' + recipientPhoneNumberOrEmail + ' from ' + this.email;
-    }
-  };
+        // We need `.call` here to make sure that `this` will reference our smart phone in makePhone's send
+        return oldSend.call(this, recipientPhoneNumberOrEmail, message);
+      } else {
+        return 'sending the message "' + message + '" to email ' + recipientPhoneNumberOrEmail + ' from ' + this.email;
+      }
 
-  return phone;
 };
 
 // your code is here
+Object.create(smartphone.prototype)=phone.prototype
